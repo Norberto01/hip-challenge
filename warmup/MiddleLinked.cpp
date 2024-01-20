@@ -15,6 +15,13 @@ struct ListNode {
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        
+        ListNode *middle = head;
+        ListNode *fast = head;
+
+        while(fast && fast->next){
+            middle = middle->next;
+            fast = fast->next->next;
+        }
+        return middle;
     }
 };
