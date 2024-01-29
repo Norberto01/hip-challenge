@@ -14,10 +14,42 @@ string rtrim(const string &);
  *  2. LONG_INTEGER n
  */
 
+
 long repeatedString(string s, long n) {
+    if (n == 0){
+        return 0;
+    }
     long strSize = s.size();
-    long rv = (strSize == 1) ? n : (n - strSize);
+    if (strSize == 1){
+        return n;
+    }
+    long rv = 0;
+    long occurrences = count(s.begin(), s.end(), 'a');
+    double mod = double(n) / double(strSize);
+    rv = static_cast<long>(ceil(mod * occurrences));
     return rv;
+}
+
+long repeatedStringB(string s, long n){
+    long rv = 0;
+    long rem = n % s.length();
+    long strSize = s.size();
+    if (strSize == 1){
+        return n;
+    }
+
+    for (char c: s){
+        if (c == 'a'){
+            ++ rv;
+        }
+    }
+
+    for(long i = 0; i < rem; i++){
+        if (s[i] == 'a'){
+            ++rv;
+        }
+    }
+    return rv * rem;
 }
 
 int main()
@@ -51,7 +83,7 @@ string ltrim(const string &str) {
 
     return s;
 }
-
+// abaabaabaa
 string rtrim(const string &str) {
     string s(str);
 
