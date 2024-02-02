@@ -16,24 +16,28 @@ class Solution{
             sort(nums.begin(), nums.end());
             int count = 0;
             int mid = left + ((right - left) / 2);
-            cout << "---NM: " << mid;
+            // cout << "---NM: " << mid;
             while(left <= right) {
-                cout << endl << "*)C("<< count << ") M:" << mid << " | V(M):" << nums.at(mid) << " | T:" << target << " | L:" << left << " | R:" << right << endl;
+                // cout << endl << "*)C("<< count << ") M:" << mid << " | V(M):" << nums.at(mid) << " | T:" << target << " | L:" << left << " | R:" << right << endl;
                 if (nums.at(mid) == target) {
                     rv.insert(rv.begin(), mid);
-                    // left = mid + 1;
-                    right = mid - 1;
+                    int vr = mid-1;
+                    if ((vr > 0 && vr < nums.size()) && (nums.at(mid-1) <= target)){
+                        right = mid - 1;
+                    } else {
+                        left = mid + 1;
+                    }
                 } else if (nums.at(mid) < target) {
                     left = mid + 1;
-                    // right = mid - 1;
                 }else{
                     left ++;
                     right --;
                 }
                 mid = left + ((right - left) / 2);
-                cout << "---NM: " << mid;
+                // cout << "---NM: " << mid;
                 count ++;
             }
+            sort(rv.begin(), rv.end());
             return rv;
         }
 };
